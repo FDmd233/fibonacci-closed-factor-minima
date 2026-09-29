@@ -1,0 +1,842 @@
+\documentclass[11pt]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs,tabularx,longtable,array}
+\usepackage{enumitem,needspace}
+\usepackage[hidelinks]{hyperref}
+\usepackage[margin=1.15in]{geometry}
+\hypersetup{pdftitle={Closed-Factor Minima and the Closed-Rich Constant of the Fibonacci Word},pdfauthor={OpenAI}}
+\setlist{nosep}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{definition}[theorem]{Definition}
+\newcommand{\Cl}{\operatorname{Cl}}
+\newcommand{\LRS}{\operatorname{LRS}}
+\newcommand{\pre}{\operatorname{pre}}
+\newcommand{\suf}{\operatorname{suf}}
+\newcommand{\Fac}{\operatorname{Fac}}
+\newcommand{\Rho}{\varrho}
+\newcommand{\pospart}[1]{(#1)_{+}}
+\newcommand{\eps}{\varepsilon}
+\allowdisplaybreaks
+\raggedbottom
+
+\title[Closed-factor minima in the Fibonacci word]{Closed-Factor Minima and the Closed-Rich Constant of the Fibonacci Word}
+\author{OpenAI}
+\date{}
+
+\begin{document}
+\begin{abstract}
+Let $f$ be the infinite Fibonacci word and let
+\[
+ M_n=\min\{\Cl(w):w\in\Fac(f),\ |w|=n\},
+\]
+where $\Cl(w)$ is the number of distinct closed factors of $w$ (including the empty word).  We determine $M_n$ for every $n$.  In particular, we prove the first-difference formula conjectured by Maity and Puzynina and obtain the exact closed-rich constant
+\[
+ C_f=\frac{\phi^3}{(\phi^3+2)^2}
+     =\frac{5\phi+3}{\phi^2(\phi^3+2)^2},
+ \qquad \phi=\frac{1+\sqrt5}{2}.
+\]
+For $k\ge5$, at the lengths $F_k+2F_{k-3}-2$ the minimizing factor is unique and equals
+$f_{k-3}f_kf_{k-3}^{--}$.
+Singular kernels determine the repeated suffixes, and reversal symmetry reduces the minimization to a discrete concavity argument.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+A finite word is \emph{closed} if its length is at most one, or if it has a
+nonempty proper border occurring exactly twice, as prefix and suffix.
+Occurrences may overlap.  Write $\Cl(w)$ for the number of distinct closed
+factors of $w$, including the empty word.  For the Fibonacci word $f$, put
+\[
+ M_n=\min\{\Cl(w):w\in\Fac(f),\ |w|=n\},\qquad M_0=1,
+ \qquad C_f=\inf_{n\ge1}\frac{M_n}{n^2}.
+\]
+Maity and Puzynina conjectured the first differences of $M_n$ and the exact
+value of $C_f$ \cite[Conjectures 5.2--5.3]{MP}.  Their Remark 5.4 also
+identifies a conjecturally unique minimizing factor at certain lengths.
+We prove these assertions.  We use the singular-kernel results of Huang
+and Wen \cite{HW}; the closed-factor counts are derived below.
+
+Let $f_{-1}=b$, $f_0=a$ and $f_j=f_{j-1}f_{j-2}$ for $j\ge1$, and let
+$f=\lim_j f_j$.  Write $F_j=|f_j|$, so
+\[
+ F_{-1}=F_0=1,\qquad F_{j+1}=F_j+F_{j-1}.
+\]
+Throughout a Fibonacci block we use
+\begin{equation}\label{eq:ABCD}
+ \begin{gathered}
+ k\ge5,\quad A=F_{k-4},\quad B=F_{k-3},\quad C=A+B,
+ \quad D=A+2B,\quad K=2A+3B=F_k,\\
+ P=B-A=F_{k-5}>0,\qquad E=2A-B=F_{k-6}>0.
+ \end{gathered}
+\end{equation}
+In particular $A\ge2$, $A<B<2A$, $C=F_{k-2}$ and $D=F_{k-1}$.
+Empty integer ranges are always omitted.  We write $w^R$ for reversal,
+$w^-$ for deletion of the last letter, and ${}^-w$ for deletion of the
+first letter.  Prefixes and suffixes of length zero are empty.
+
+\Needspace{14\baselineskip}
+Our main formula is the following.
+
+\begin{theorem}\label{thm:Mn}
+Let $k\ge5$ and $0\le a\le D-1$.  Write
+\begin{equation}\label{eq:mk}
+ m_k=1+B(2A+B+2).
+\end{equation}
+Then
+\begin{equation}\label{eq:Mpiece}
+M_{K+a}=
+\begin{cases}
+ m_k+Aa-2P,&0\le a\le A-2,\\
+ m_k+Ca-A(B-2),&A-1\le a\le B-2,\\
+ m_k+Ba,&B-1\le a\le2B-2,\\
+ m_k+B(2B-2)+D(a-2B+2),&2B-1\le a\le D-2,\\
+ m_k+C(D-1)-AB+A,&a=D-1.
+\end{cases}
+\end{equation}
+\end{theorem}
+
+Since $[F_k,F_{k+1}-1]=[K,K+D-1]$, these blocks cover all sufficiently large lengths without overlap.  Taking differences gives the conjectured sequence.
+
+\begin{corollary}\label{cor:R}
+For $k\ge5$,
+\begin{equation}\label{eq:Rpiece}
+R_{F_k+a}:=M_{F_k+a}-M_{F_k+a-1}=
+\begin{cases}
+ A,&0\le a\le A-2,\\
+ C,&A-1\le a\le B-2,\\
+ B,&B-1\le a\le2B-2,\\
+ D,&2B-1\le a\le D-2,\\
+ B,&a=D-1.
+\end{cases}
+\end{equation}
+Equivalently, if $v^{[r]}$ means $r$ consecutive copies of the integer $v$,
+then $(R_n)_{n\ge1}$ is the concatenation
+\[
+ (1,1,1,1)\ \prod_{j=0}^{\infty}
+ \bigl(F_j^{[F_j]},F_{j+2}^{[F_{j-1}]},
+       F_j^{[F_j]},F_{j+2}^{[F_{j-1}]}\bigr).
+\]
+This is Conjecture 5.2 of \cite{MP}.
+\end{corollary}
+
+\begin{corollary}\label{cor:unique}
+For every $k\ge5$, at
+\[
+ N_k=F_k+2F_{k-3}-2
+\]
+the minimum is attained by exactly one factor.  It is
+\begin{equation}\label{eq:Pk}
+ P_k=f_{k-3}f_kf_{k-3}^{--},
+ \qquad
+ M_{N_k}=1+F_{k-3}F_k.
+\end{equation}
+Here $w^{--}$ denotes deletion of the last two letters of $w$.
+\end{corollary}
+
+\begin{theorem}\label{thm:Cf}
+The closed-rich constant of the Fibonacci word is
+\[
+ \boxed{\displaystyle
+ C_f=\frac{\phi^3}{(\phi^3+2)^2}
+ =\frac{5\phi+3}{\phi^2(\phi^3+2)^2}.}
+\]
+Thus Conjecture 5.3 of \cite{MP} holds.
+\end{theorem}
+
+\section{Singular kernels and repeated suffixes}
+
+\subsection{The singular envelope}
+If $\alpha_j$ is the last letter of $f_j$, define
+\[
+ s_j=\alpha_{j-1}f_j^-\quad(j\ge0),\qquad s_{-1}=a.
+\]
+Thus $s_{-1}=a$, $s_0=b$, $s_1=aa$, $s_2=bab$.  These words are
+palindromes, and $|s_j|=F_j$.  The identities
+\begin{equation}\label{eq:singid}
+ s_j=s_{j-2}s_{j-3}s_{j-2},\qquad
+ s_j^-=s_{j-2}s_{j-1}^- \quad(j\ge2)
+\end{equation}
+follow from the Fibonacci recursion; see also \cite[Lemma 3.1]{HW}.
+
+The singular kernel of a factor is the longest singular word occurring in it; ties in length are resolved by taking the larger index.
+We use the following precise form of the singular-kernel description
+\cite[Proposition 1.7, Theorem 2.1 and Corollary 3.4]{HW}.  For $j\ge1$,
+a factor with kernel $s_j$ has a unique expression $u s_j v$, with
+\[
+ 0\le |u|,|v|<F_{j+1}.
+\]
+The two extensions are the corresponding suffix and prefix of
+$s_{j+1}$.  Every pair of lengths in this range is allowed, and the
+occurrences of $u s_jv$ correspond in order to the occurrences of $s_j$.
+Indeed, the common envelope is
+\[
+ ({}^-s_{j+1})s_j(s_{j+1}^-),
+\]
+and its kernel is $s_j$, occurring once.
+For $j=0$ the envelope is $aba$: the four words with designated kernel
+$b$ are $b,ab,ba,aba$, and every $b$ is flanked by $a$'s.
+For $j=-1$ the only word is $a$.  These two observations extend the same
+statement to the short cases.  In the one-letter tie, the larger index
+is chosen.
+
+Positions start at zero.  If $q_{j,p}$ is the start of the $p$th
+occurrence of $s_j$, then
+\begin{equation}\label{eq:q}
+ q_{j,p}=pF_{j+1}+b_pF_j-1,
+\end{equation}
+where $b_p$ counts the letters $a$ in the first $p-1$ letters of $f$.
+To see this, the first occurrence starts at $F_{j+1}-1$, and the
+successive start-to-start distances are $F_{j+2},F_{j+1}$ in Fibonacci
+order \cite[Proposition 1.7]{HW}.  For $j=-1,0$ the same conclusion
+follows from the substitution $a\mapsto ab$, $b\mapsto a$.
+Only the following values will be needed:
+\begin{equation}\label{eq:bp}
+ (b_1,\ldots,b_{16})=(0,1,1,2,3,3,4,4,5,6,6,7,8,8,9,9).
+\end{equation}
+They are the cumulative counts in the prefix $abaababaabaabab$.
+
+\begin{lemma}[Suffix intervals]\label{lem:returntest}
+Fix an endpoint $R$ and an occurrence $q=q_{j,p}$.  If
+\[
+ 0\le R-q-F_j+1<F_{j+1},
+\]
+then the suffixes ending at $R$ with this designated kernel have exactly
+the lengths
+\begin{equation}\label{eq:interval}
+ R-q+1\le\ell\le R-q+F_{j+1}.
+\end{equation}
+Let $d=q_{j,p}-q_{j,p-1}$ when $p>1$, and let $d=\infty$ when $p=1$.
+Such a suffix repeats within the length-$N$ window ending at $R$ if and
+only if
+\begin{equation}\label{eq:returntest}
+ \ell+d\le N.
+\end{equation}
+\end{lemma}
+\begin{proof}
+The right extension has length $R-q-F_j+1$.  Letting the left extension
+range from $0$ to $F_{j+1}-1$ gives \eqref{eq:interval}.  Synchronization
+places the preceding copy exactly $d$ positions to the left.  It lies in
+the window precisely when \eqref{eq:returntest} holds.  If that copy
+starts before the window, every earlier copy does too.
+\end{proof}
+
+\subsection{The counting increment}
+Let $\LRS(w)$ be the longest suffix occurring at least twice in $w$, with
+$\LRS(w)=\eps$ if no nonempty suffix repeats; set $\LRS(\eps)=\eps$.
+Write
+\[
+ \Rho(w)=|\LRS(w)|-|\LRS(\LRS(w))|.
+\]
+We include a proof of the increment identity of
+\cite[Lemma 3.1]{MP}.
+
+\begin{lemma}\label{lem:increment}
+If appending the last letter does not enlarge the alphabet, then
+\begin{equation}\label{eq:increment}
+ \Cl(w)-\Cl(w^-)=\Rho(w).
+\end{equation}
+If the last letter is new, the increment is one.
+\end{lemma}
+\begin{proof}
+Put $t=\LRS(w)$ and $z=\LRS(t)$.  A new factor must be a suffix of
+length greater than $|t|$.  For each nonempty suffix $v$ of $t$, take its
+complete return formed by its last two occurrences in $w$.  This is a
+closed suffix with longest border $v$.  It has length greater than
+$|t|$ exactly when $v$ does not repeat in $t$, that is, when
+$|z|<|v|\le|t|$.  Conversely, every new closed suffix arises this way
+from its longest border: that border repeats in $w$, hence is a suffix
+of $t$.  Distinct longest borders give distinct closed suffixes.
+There are $|t|-|z|$ choices.  If the last letter is new, the only new
+closed factor is that letter.
+\end{proof}
+
+\section{Local suffix profiles}
+
+\subsection{Three families}
+Fix the parameters in \eqref{eq:ABCD} and $0\le a\le D-1$.
+The length-$(K+a)$ factors are precisely
+\begin{align}
+ W^{21}_{a,i}&=\suf_i(s_{k-1})s_k\pre_{a-i}(s_{k-1}),
+ &&0\le i\le a,\label{eq:W21}\\
+ W^{22}_{a,i}&=\suf_i(s_k)s_{k-1}\pre_{C+a-i}(s_k),
+ &&0\le i\le C+a,\label{eq:W22}\\
+ W^{23}_{a,i}&=\suf_{a+i+1}(s_{k-1})s_{k-2}\pre_{D-i-1}(s_{k-1}),
+ &&0\le i\le D-a-2.\label{eq:W23}
+\end{align}
+Here is a direct consequence of the envelope description that also
+checks the boundary $a=0$.  A kernel of order at most $k-3$ allows length
+at most $F_{k-3}+2F_{k-2}-2=K-2$, and a kernel of order at least $k+1$
+is too long.  The only orders are therefore $k,k-1,k-2$.
+Distributing the remaining length between the two allowed extensions
+gives exactly \eqref{eq:W21}--\eqref{eq:W23}.  For the first family,
+$s_{k+1}$ has prefix and suffix $s_{k-1}$ by \eqref{eq:singid}.
+Uniqueness of the kernel makes the parametrizations injective and their
+images disjoint.  Their cardinalities sum to $K+a+1$.
+The same classification, independently of the parameters $A,B$, is valid
+at $k=4$ and will be used for the initial cases.
+
+\begin{proposition}\label{prop:rho}
+Put $L_a=\max(0,a-B+1)$ and
+$\Rho_{rs}(a,i)=\Rho(W^{rs}_{a,i})$.  Then
+\begin{equation}\label{eq:rho21}
+ \Rho_{21}(a,i)=
+ \begin{cases}
+ \min(D,C+1+i),&i\le a-B,\\
+ \max(B,i+1),&i>a-B,
+ \end{cases}
+\end{equation}
+\begin{equation}\label{eq:rho22}
+ \Rho_{22}(a,i)=
+ \begin{cases}
+ C,&i<L_a,\\
+ B,&L_a\le i\le a,\\
+ \min(C,B+i+1),&a<i<B+a+1,\\
+ \min(C,i+1),&i\ge B+a+1,
+ \end{cases}
+\end{equation}
+and
+\begin{equation}\label{eq:rho23}
+ \Rho_{23}(a,i)=
+ \begin{cases}
+ \max(B,\min(C,a+i+2)),&i<B,\\
+ \max(A,a+i-B+2),&B\le i<C,\\
+ B,&i\ge C.
+ \end{cases}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Write $L=|\LRS(W)|$ and $T=|\LRS(\LRS(W))|$.
+Appendix~\ref{app:intervals} gives the suffix intervals from
+Lemma~\ref{lem:returntest}.  Each row specifies an entire interval of
+lengths and its preceding return distance; the rows cover all lengths
+above the value of $T$ obtained below.  Thus no longer suffix is omitted.
+We apply \eqref{eq:returntest} first with $N=K+a$ and then with $N=L$.
+
+\paragraph{Family $21$.}
+Put $x=a-i$.  The interval $[C+x,K+x-1]$ has distance $D$, so its
+largest repeated length is $L=C+a$.  It lies in that interval because
+$0\le i\le a<D$.  Every larger length either fails the return inequality
+or lies in the first-occurrence interval.
+If $x<B$, the distance-$D$ interval cannot repeat inside length $L$,
+since $L-D<C+x$.  The distance-$B$ interval gives
+\[
+ T=\min(C+x-1,A+a).
+\]
+If $x\ge B$, the two distance-$D$ intervals join to $[x,K+x-1]$.
+They contribute through $a-B$ when $a-B\ge x$; immediately below them,
+length $x-1$ repeats, with distance $A$ or $C$.  Thus
+\[
+ T=\max(x-1,a-B).
+\]
+Subtracting these two values from $C+a$ proves \eqref{eq:rho21}.
+
+\paragraph{Family $22$.}
+Put $x=a-i$, so $-C\le x<D$.  If $x\ge0$, the distance-$K$ interval
+begins at $C+x$.  It contributes length $a$ precisely when $i\ge C$;
+otherwise the next interval contributes its upper endpoint $C+x-1$.
+If $x<0$, the highest finite-distance interval has distance $C$.
+Consequently
+\begin{equation}\label{eq:L22}
+ L=\begin{cases}
+ \max(a,C+x-1),&x\ge0,\\
+ \min(D+a,K+x-1),&x<0.
+ \end{cases}
+\end{equation}
+For the second pass there are four cases.
+
+If $x\ge B$, then $i<C$ and $L=C+x-1$.  The distance-$D$ interval
+starts at $x$, whereas $L-D=x-B-1<x$; the interval ending at $x-1$
+has distance at most $C$.  Hence $T=x-1$ and $L-T=C$.
+
+If $0\le x<B$, the distance-$B$ interval gives $T=L-B$, except possibly
+when $i<C$ and $x<P$.  In that case $L-B=A+x-1$ is one position below
+this interval; the interval of distance $P$ ends at precisely that
+length and supplies the return.  If $x\ge P$, the adjacent
+ distance-$B$ interval already covers it.  Thus $L-T=B$ throughout.
+
+If $-B\le x<0$, the distance-$C$ intervals join to
+$[C+x,K+x-1]$.  When $i\ge A$, they contain $L-C$ and $L-T=C$.
+When $i<A$, one has $x>-A$ and $L=D+a$; the distance-$C$ intervals
+cannot repeat, and the distance-$B$ interval ends at $C+x-1$.
+Thus $T=C+x-1$ and $L-T=B+i+1$.  The two cases give
+$\min(C,B+i+1)$.
+
+Finally, if $-C\le x<-B$, then $L-C\le D+x-1$, below the
+ distance-$C$ interval.  The distance-$A$ interval repeats through its
+upper endpoint $D+x-1$, giving
+\[
+ L-T=\min(D+a,K+x-1)-(D+x-1)=\min(i+1,C).
+\]
+These are the four lines of \eqref{eq:rho22}.
+
+\paragraph{Family $23$.}
+Here $a+i\le D-2$.  The distance-$D$ interval contributes $C+a$ when
+$a+i\ge B-1$.  Otherwise $i<B$ and the distance-$C$ interval ends at
+$D-i-2$.  For $i\ge C$ the highest finite-distance interval repeats
+through $K-i-2$.  Therefore
+\[
+ L=\begin{cases}
+ \max(C+a,D-i-2),&i<B,\\
+ C+a,&B\le i<C,\\
+ K-i-2,&i\ge C.
+ \end{cases}
+\]
+If $i<B$, the distance-$D$ interval cannot repeat inside length $L$.
+The distance-$C$ interval contributes $a$ exactly when $a+i\ge C-1$;
+otherwise the next interval, of distance $B$ or $P$, ends at $C-i-2$
+and repeats.  Hence
+\[
+ T=\max(a,C-i-2).
+\]
+Putting $z=a+i+2$, subtraction gives
+$L-T=\max(C+z,D)-\max(z,C)=\max(B,\min(C,z))$.
+If $B\le i<C$, the distance-$A$ interval gives
+\[
+ T=\min(B+a,D-i-2),\qquad L-T=\max(A,a+i-B+2).
+\]
+If $i\ge C$, the length $2C-i-2$ lies in the distance-$B$ interval
+when $i<2A+B$, and at the upper endpoint of the distance-$P$ interval
+otherwise.  It repeats in both cases; the next length cannot repeat.
+Thus $T=2C-i-2$ and $L-T=B$, completing the proof.
+\end{proof}
+
+\section{Reversal, discrete concavity, and exact minima}
+
+\subsection{A minimization lemma}
+The Fibonacci word contains neither $bb$ nor $aaa$.  Consequently every
+factor of length at least three has both letters, and all one-letter
+deletions in this section preserve the alphabet.
+Fix one of the three families, suppress $a$ and the family label, and write
+\[
+ G(i)=\Cl(W_{a,i}),\qquad r(i)=\Rho(W_{a,i}),\qquad 0\le i\le h.
+\]
+The three values of $h$ are $a$, $C+a$, and $D-a-2$.
+
+Since every singular word is a palindrome, the parametrizations \eqref{eq:W21}--\eqref{eq:W23} give
+\begin{equation}\label{eq:reverseW}
+ W_{a,i}^{R}=W_{a,h-i},\qquad G(i)=G(h-i).
+\end{equation}
+Moreover $W_{a,i}^-=\,{}^-W_{a,i+1}$.  Applying Lemma \ref{lem:increment} once on each side of this common length-$(K+a-1)$ word, and using \eqref{eq:reverseW}, yields
+\begin{equation}\label{eq:diffG}
+ \boxed{\;G(i+1)-G(i)=r(h-i-1)-r(i).\;}
+\end{equation}
+
+\begin{lemma}[Discrete concavity]\label{lem:concavity}
+Let $J$ be the set of downward-jump indices of $r$,
+\[
+ J=\{j:1\le j\le h,\ r(j)<r(j-1)\}.
+\]
+Then the minimum of $G$ is attained among
+\begin{equation}\label{eq:candidates}
+ \{0,h\}\cup J\cup\{h-j:j\in J\}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Away from an index in $J$ and its reflection, both increments appearing below are nonnegative:
+\begin{align*}
+ &[G(i+1)-G(i)]-[G(i)-G(i-1)]\\
+ &\qquad=-[r(h-i)-r(h-i-1)]-[r(i)-r(i-1)]\le0.
+\end{align*}
+Thus $G$ is discretely concave on each interval cut out by the points in \eqref{eq:candidates}.  A concave sequence takes its minimum on an interval at an endpoint.
+\end{proof}
+
+\subsection{Baseline values}
+Set
+\[
+ m=\Cl(s_k).
+\]
+From \eqref{eq:rho21}, extending $W^{21}_{a,0}=s_k\pre_a(s_{k-1})$ one letter at a time gives
+\begin{equation}\label{eq:H21}
+ H_{21}(a):=\Cl(W^{21}_{a,0})
+ =m+B\min(a,B-1)+(C+1)\pospart{a-B+1}.
+\end{equation}
+
+To anchor the $22$ family, let $v=f_k^-$ and let $\alpha,\beta$ be the
+last letters of $f_k,f_{k-1}$, respectively.  Then
+\[
+ W^{22}_{0,0}=s_{k-1}s_{k-2}=\alpha v,
+ \qquad s_k=\beta v.
+\]
+By reversal, \eqref{eq:rho22} at $i=C$ gives the increment $C$ for
+prepending $\alpha$, whereas \eqref{eq:rho21} gives increment $B$ for
+prepending $\beta$.  Hence $\Cl(W^{22}_{0,0})=m+C-B=m+A$.
+Right extension now gives
+\begin{equation}\label{eq:H22}
+ H_{22}(a)=m+A+B\min(a,B-1)+C\pospart{a-B+1}.
+\end{equation}
+Finally \eqref{eq:singid} gives
+$W^{23}_{a,0}=(W^{21}_{a+1,a+1})^-$, so
+\begin{equation}\label{eq:H23rel}
+ H_{23}(a)=H_{21}(a+1)-\max(B,a+2),\qquad a\le D-2.
+\end{equation}
+
+These relations also determine $m$ without a separate counting formula.
+Since $s_{k+1}^-=s_{k-1}s_k^-=W^{22}_{D-1,0}$ and
+$\Rho(s_{k+1})=C$, we obtain
+\[
+ m_{k+1}=m_k+B^2+C^2+2A.
+\]
+Appendix~\ref{app:initial} gives $\Cl(s_5^-)=25$, and
+$\Rho(s_5)=F_2=3$, so $m_5=28$.  The expression
+\begin{equation}\label{eq:mformula}
+ m_k=1+B(2A+B+2)
+\end{equation}
+has this initial value and the displayed recurrence, since the next
+pair $(A,B)$ is $(B,C)$.
+
+\subsection{Minima in the three families}
+We apply Lemma~\ref{lem:concavity}.  All candidate values below use the
+same telescoping identity, with $S(v)=\sum_{j=0}^{v-1}r(j)$:
+\begin{equation}\label{eq:sumG}
+ G(i)-G(0)=S(h)-S(h-i)-S(i).
+\end{equation}
+For clarity, each linear piece of $S$ can be evaluated by
+\[
+ \sum_{j=u}^{v-1}(c+j)=(v-u)c+\frac{(v-u)(u+v-1)}2.
+\]
+Splitting at the thresholds in \eqref{eq:rho21}--\eqref{eq:rho23}
+gives the candidate differences recorded below.
+
+\paragraph{Family $21$.}
+The only possible downward jump of \eqref{eq:rho21} is at
+\[
+ u=a-B+1.
+\]
+If $a\le B-1$, then $r(i)=B$ throughout and $G_{21}$ is constant.  If
+$B\le a\le2B-2$, direct summation of \eqref{eq:diffG} gives
+\begin{equation}\label{eq:21drop1}
+ G_{21}(u)-H_{21}(a)=-(A+1)u,
+\end{equation}
+and $G_{21}$ is constant from $u$ to its reflection $B-1$.  If $a\ge2B-1$, the reflected candidate gives
+\begin{equation}\label{eq:21drop2}
+ G_{21}(B-1)-H_{21}(a)=(B-1)(a-D+1).
+\end{equation}
+Consequently
+\begin{equation}\label{eq:min21}
+\min_iG_{21}(i)=
+\begin{cases}
+ m+Ba,&0\le a\le2B-2,\\
+ m+B(2B-2)+D(a-2B+2),&2B-1\le a\le D-1.
+\end{cases}
+\end{equation}
+The drop in \eqref{eq:21drop1} is strictly negative.  Concavity therefore makes every point outside the central plateau strictly larger than its value.  For $a=B-1$ the whole family is constant.  Thus, for $B-1\le a\le2B-2$, the complete minimizing interval is
+\begin{equation}\label{eq:plateau21}
+ a-B+1\le i\le B-1.
+\end{equation}
+
+\paragraph{Family $22$.}
+The only possible downward jumps are
+\[
+ L_a=\max(0,a-B+1),\qquad B+a+1.
+\]
+The second is a genuine downward jump only when $a\le A-3$; its reflection is $A-1$, and
+\begin{equation}\label{eq:22jump2}
+ G_{22}(A-1)-H_{22}(a)=A(a+1)>0.
+\end{equation}
+For the first jump, which occurs when $a\ge B$,
+\begin{equation}\label{eq:22jump1}
+ G_{22}(L_a)-H_{22}(a)=
+\begin{cases}
+ 0,&B\le a\le D-2,\\
+ -A,&a=D-1.
+\end{cases}
+\end{equation}
+Thus
+\begin{equation}\label{eq:min22}
+\min_iG_{22}(i)=
+\begin{cases}
+ m+A+Ba,&0\le a\le B-1,\\
+ m+Ca-AB+2A,&B\le a\le D-2,\\
+ m+C(D-1)-AB+A,&a=D-1.
+\end{cases}
+\end{equation}
+
+\paragraph{Family $23$.}
+The only possible downward jumps of \eqref{eq:rho23} are at $B$ and $C$.  From \eqref{eq:H23rel}, for $a\le B-2$ one has $H_{23}(a)=m+Ba$.  Whenever the indicated candidates lie in the parameter range, summing \eqref{eq:diffG} gives
+\begin{equation}\label{eq:23B}
+ G_{23}(B)-H_{23}(a)=
+\begin{cases}
+ -(a+2)(B-A),&0\le a\le A-3,\\
+ A(a-B+2),&A-2\le a\le B-2,
+\end{cases}
+\end{equation}
+and
+\begin{equation}\label{eq:23C}
+ G_{23}(C)=H_{23}(a)\qquad(0\le a\le B-2).
+\end{equation}
+For $a\ge B-1$, \eqref{eq:H23rel} becomes
+\[
+ H_{23}(a)=m+Ca-AB+2A,
+\]
+and, if $B$ remains in range, $G_{23}(B)=H_{23}(a)$.  Lemma \ref{lem:concavity} therefore gives
+\begin{equation}\label{eq:min23}
+\min_iG_{23}(i)=
+\begin{cases}
+ m+Aa-2P,&0\le a\le A-2,\\
+ m+Ca-AB+2A,&A-1\le a\le D-2.
+\end{cases}
+\end{equation}
+
+\subsection{Proof of the main counting theorem}
+Comparing \eqref{eq:min21}, \eqref{eq:min22}, and \eqref{eq:min23} is now elementary.  We record the differences that determine the winner:
+\begin{align*}
+ &\min G_{22}-\min G_{21}=A>0,
+ &&0\le a\le A-2,\\
+ &\min G_{21}-\min G_{23}=P(a+2)>0,
+ &&0\le a\le A-2,\\
+ &\min G_{21}-\min G_{23}=A(B-a-2)\ge0,
+ &&A-1\le a\le B-2,\\
+ &\min G_{22}-\min G_{23}=A(B-a-1)>0,
+ &&A-1\le a\le B-2,\\
+ &\min G_{22}-\min G_{21}=A(a-B+2)>0,
+ &&B-1\le a\le2B-2,\\
+ &\min G_{22}-\min G_{21}=B(D-a-2)\ge0,
+ &&2B-1\le a\le D-2.
+\end{align*}
+On $B-1\le a\le D-2$, equations \eqref{eq:min22} and \eqref{eq:min23} give $\min G_{22}=\min G_{23}$ whenever the $23$ family is present.  Thus the displayed comparisons cover all three families on every interval.  At $a=D-1$ the $23$ family is empty and
+\[
+ \min G_{21}-\min G_{22}=A+B>0.
+\]
+This proves Theorem \ref{thm:Mn}.
+
+For $a\ge1$, Corollary \ref{cor:R} follows by subtracting adjacent cases in \eqref{eq:Mpiece}.  For $k\ge6$, the preceding block is available and
+\[
+ M_{F_k}=1+2AB+B^2+2A,
+ \qquad
+ M_{F_k-1}=1+2AB+B^2+A,
+\]
+where the second value is the last case of the preceding Fibonacci block.  Hence $R_{F_k}=A$ for $k\ge6$.  At $k=5$,
+$M_{13}=28-2=26$ and Appendix~\ref{app:initial} gives $M_{12}=24$,
+so $R_{13}=2=A$ as well.  The initial differences and the block formula
+concatenate into the sequence in Corollary~\ref{cor:R}.
+
+At $a=2B-2$, the interval \eqref{eq:plateau21} shrinks to the single index $i=B-1$, while both other families are larger by $AB>0$.
+To identify this factor, let $g=f_{k-3}$ and $h=f_{k-4}$, and let
+$\alpha$ be the last letter of $f_k$ and $\beta$ the last letter of
+$f_{k-1}$.  Then $f_{k-1}=ghg$, the last letter of $g$ is $\beta$, and
+\[
+ s_{k-1}=\alpha ghg^{-},\qquad s_k=\beta f_k^{-}.
+\]
+Hence
+\[
+ \suf_{B-1}(s_{k-1})=g^{-},\qquad
+ \pre_{B-1}(s_{k-1})=\alpha g^{--},
+\]
+and therefore, since $g=g^{-}\beta$ and $f_k=f_k^{-}\alpha$,
+\[
+ W^{21}_{2B-2,B-1}
+   =g^{-}\beta f_k^{-}\alpha g^{--}
+   =f_{k-3}f_kf_{k-3}^{--}.
+\]
+Finally \eqref{eq:mformula} and \eqref{eq:min21} give
+\[
+ M_{N_k}=m+B(2B-2)=1+BK.
+\]
+This proves Corollary \ref{cor:unique}.
+
+The lengths below $F_5$ are given explicitly in Appendix \ref{app:initial}.  Together with Theorem~\ref{thm:Mn}, this completes Conjecture 5.2 for every length.
+
+\section{The closed-rich constant}
+We prove Theorem~\ref{thm:Cf}.  Linearly interpolate $M_n$ between
+successive integers and call the resulting function $M(x)$.
+On a segment where $M(x)=ux+v$, with $u>0$,
+\[
+ \frac{d}{dx}\frac{M(x)}{x^2}=\frac{-ux-2v}{x^3}.
+\]
+The numerator is decreasing, so an interior critical point can only be
+a maximum.  At a downward change of slope, the derivative also jumps
+downward.  Thus, between consecutive upward changes of slope, the
+minimum of $M(x)/x^2$ occurs at an endpoint.
+
+For $x\ge13$, Corollary~\ref{cor:R} shows that the upward changes occur
+exactly at
+\[
+ T_k=K+A-2=3C-2,\qquad N_k=K+2B-2 \quad(k\ge5).
+\]
+There is no extra change at a Fibonacci boundary: the final slope $B$
+of one block equals the initial slope of the next.  Since $T_5=13$,
+these intervals cover $[13,\infty)$.  Theorem~\ref{thm:Mn} gives
+\[
+ M_{T_k}=1+C^2,\qquad M_{N_k}=1+BK.
+\]
+The first ratios satisfy
+\begin{equation}\label{eq:Tbound}
+ \frac{M_{T_k}}{T_k^2}=\frac{1+C^2}{(3C-2)^2}>\frac19.
+\end{equation}
+
+Set $t=\phi^3>4$ and
+\[
+ q_k=\frac{1+BK}{(K+2B-2)^2},\qquad \lambda=\frac{t}{(t+2)^2}.
+\]
+Because $(t+2)^2-9t=(t-1)(t-4)>0$, one has $\lambda<1/9$.
+Binet's formula gives the exact identity
+\[
+ K=tB+e_k,\qquad e_k=2(-1)^{k-1}\phi^{-(k-1)},\qquad |e_k|<1.
+\]
+Clearing the denominators in $q_k-\lambda$ gives
+\begin{align*}
+ &(1+BK)(t+2)^2-t(K+2B-2)^2\\
+ &\quad=(t+2)B\bigl(4t+(2-t)e_k\bigr)
+            +(t+2)^2-t(e_k-2)^2.
+\end{align*}
+Both terms are positive: the bracket is greater than $3t+2$, and
+\[
+ (t+2)^2-t(e_k-2)^2>(t+2)^2-9t=(t-1)(t-4)>0.
+\]
+Thus $q_k>\lambda$ for every $k\ge5$, while $q_k\to\lambda$ because
+$B\to\infty$ and $e_k\to0$.
+Together with \eqref{eq:Tbound} and the interpolation argument, this
+proves $M_n/n^2>\lambda$ for $n\ge13$.  The initial table gives
+$M_n/n^2\ge1/6$ for $1\le n\le12$.  Taking the infimum yields
+$C_f=\lambda$.  Finally $\phi^5=5\phi+3$, giving the second form of the
+constant in Theorem~\ref{thm:Cf}.
+
+\appendix
+\section{Suffix intervals}\label{app:intervals}
+The following tables give the intervals used in Proposition~\ref{prop:rho}.
+We realize each word using the first occurrence of its central kernel:
+$s_k$, $s_{k-1}$ or $s_{k-2}$.  Their starting positions are
+$K+D-1$, $K-1$ and $D-1$, respectively.  Adding the core and right
+extension lengths gives the endpoints $R$ displayed below.
+A row $(j-k,p)$ refers to the occurrence $q_{j,p}$ in \eqref{eq:q};
+$d$ is its preceding start-to-start distance.  The parameter conditions
+are intersected with the ranges in \eqref{eq:W21}--\eqref{eq:W23}.
+The interval $[u,v]$ is inclusive.  Only its intersection with the window
+lengths under consideration is relevant.
+
+To derive any row, substitute $q=q_{j,p}$ in
+\[
+ [R-q+1,R-q+F_{j+1}],\qquad
+ 0\le R-q-F_j+1<F_{j+1},\qquad d=q_{j,p}-q_{j,p-1}.
+\]
+For example, in family $22$, the row $(-6,16)$ has
+$F_{k-6}=E$, $F_{k-5}=P$, and $q=16P+9E-1=2A+7B-1$.
+Since $R=2K+x-2$, it gives $[E+x,A+x-1]$, condition $0\le x<P$,
+and $d=P$.  Thus the table entries follow by subtraction, including
+the low orders $-1$ and $0$ covered by the letter envelopes in Section~2.
+The intervals in each applicable row join at successive integer lengths
+down to, and including, the second repeated suffix used in the proof.
+
+\subsection*{Family 21}
+Here $x=a-i$, $0\le x<D$, and $R=2K+D+x-2$.
+\begin{center}\small
+\begin{tabular}{ccclc}
+\toprule
+$j-k$&$p$&condition&length interval&$d$\\\midrule
+$0$&$1$&all&$[K+x,K+x+F_{k+1}-1]$&$\infty$\\
+$-2$&$3$&all&$[C+x,K+x-1]$&$D$\\
+$-3$&$5$&$B\le x<D$&$[x,C+x-1]$&$D$\\
+$-4$&$8$&$0\le x<B$&$[A+x,C+x-1]$&$B$\\
+$-5$&$14$&$B\le x<C$&$[x-A,x-1]$&$A$\\
+$-4$&$9$&$C\le x<D$&$[x-B,x-1]$&$C$\\
+\bottomrule
+\end{tabular}\end{center}
+
+\subsection*{Family 22}
+Here $x=a-i$, $-C\le x<D$, and $R=2K+x-2$.
+\begin{center}\small
+\begin{tabular}{ccclc}
+\toprule
+$j-k$&$p$&condition&length interval&$d$\\\midrule
+$-1$&$1$&all&$[K+x,2K+x-1]$&$\infty$\\
+$-2$&$2$&$0\le x<D$&$[C+x,K+x-1]$&$K$\\
+$-3$&$4$&$B\le x<D$&$[x,C+x-1]$&$D$\\
+$-3$&$3$&$-C\le x<0$&$[D+x,K+x-1]$&$C$\\
+$-4$&$7$&$C\le x<D$&$[x-B,x-1]$&$C$\\
+$-4$&$6$&$0\le x<B$&$[A+x,C+x-1]$&$B$\\
+$-4$&$5$&$-B\le x<0$&$[C+x,D+x-1]$&$C$\\
+$-5$&$11$&$B\le x<C$&$[x-A,x-1]$&$A$\\
+$-5$&$10$&$P\le x<B$&$[x,A+x-1]$&$B$\\
+$-5$&$9$&$-A\le x<0$&$[B+x,C+x-1]$&$B$\\
+$-5$&$8$&$-C\le x<-B$&$[2B+x,D+x-1]$&$A$\\
+$-6$&$16$&$0\le x<P$&$[E+x,A+x-1]$&$P$\\
+\bottomrule
+\end{tabular}\end{center}
+
+\Needspace{14\baselineskip}
+\subsection*{Family 23}
+Here $0\le i\le D-a-2$ and $R=K+D-i-3$.
+\begin{center}\small
+\begin{tabular}{ccclc}
+\toprule
+$j-k$&$p$&condition&length interval&$d$\\\midrule
+$-2$&$1$&all&$[K-i-1,K+D-i-2]$&$\infty$\\
+$-3$&$2$&$0\le i<C$&$[D-i-1,K-i-2]$&$D$\\
+$-4$&$4$&$0\le i<B$&$[C-i-1,D-i-2]$&$C$\\
+$-4$&$3$&$C\le i<D$&$[2C-i-1,K-i-2]$&$B$\\
+$-5$&$7$&$0\le i<A$&$[B-i-1,C-i-2]$&$B$\\
+$-5$&$6$&$B\le i<C$&$[2B-i-1,D-i-2]$&$A$\\
+$-5$&$5$&$C\le i<2A+B$&$[D-i-1,2C-i-2]$&$B$\\
+$-6$&$11$&$A\le i<B$&$[2A-i-1,C-i-2]$&$P$\\
+$-6$&$8$&$2A+B\le i<D$&$[3A+B-i-1,2C-i-2]$&$P$\\
+\bottomrule
+\end{tabular}\end{center}
+
+\section{Initial counts}\label{app:initial}
+At $k=4$, $a=4$, the classification in Section~3 gives five factors of
+family $21$, eight of family $22$, and none of family $23$.  Using
+$s_3=aabaa$ and $s_4=babaabab$ gives the thirteen words in the table.
+Every shorter factor extends to a length-$12$ factor, so their prefixes
+also exhaust the shorter lengths.  Entries give $\Cl(\pre_n(w))$.
+\begin{center}\small
+\begin{tabular}{lrrrrrrrr}
+\toprule
+$w$&$n=5$&$6$&$7$&$8$&$9$&$10$&$11$&$12$\\\midrule
+\texttt{aabaababaaba}&6&9&12&14&16&19&22&25\\
+\texttt{aababaabaaba}&7&9&10&13&16&19&22&25\\
+\texttt{aababaababaa}&7&9&10&13&16&19&22&27\\
+\texttt{abaabaababaa}&7&9&12&15&18&20&22&25\\
+\texttt{abaababaabaa}&7&9&11&13&16&19&22&25\\
+\texttt{abaababaabab}&7&9&11&13&16&19&22&27\\
+\texttt{ababaabaabab}&8&9&11&13&16&19&22&24\\
+\texttt{ababaababaab}&8&9&11&13&15&17&22&27\\
+\texttt{baabaababaab}&7&9&12&15&17&19&22&25\\
+\texttt{baababaabaab}&7&9&11&13&16&19&22&25\\
+\texttt{baababaababa}&7&9&11&13&16&19&23&27\\
+\texttt{babaabaababa}&7&9&11&14&17&20&22&24\\
+\texttt{babaababaaba}&7&9&11&13&15&19&23&27\\\bottomrule
+\end{tabular}\end{center}
+The entries follow by successive application of
+Lemma~\ref{lem:increment}, starting from $\Cl(\eps)=1$.
+For example, in the first row the lengths of the two successive repeated
+suffixes, for $n=5,\ldots,12$, are respectively
+\[
+ (2,3,4,2,3,4,5,6),\qquad(1,0,1,0,1,1,2,3).
+\]
+The increments are therefore $(1,3,3,2,2,3,3,3)$, giving that row from
+$\Cl(\texttt{aaba})=5$.
+Every one-letter extension increases $\Cl$ by at least one, while
+$a,aa,aab,aaba$ have counts $2,3,4,5$.
+Thus
+\[
+ (M_0,\ldots,M_{12})=(1,2,3,4,5,6,9,10,13,15,17,22,24).
+\]
+Also $s_5^-=\texttt{aabaababaaba}$, so the first row gives the base value
+used in Section~4.
+
+\begin{thebibliography}{9}
+\bibitem{HW}
+Y. Huang and Z. Wen,
+\emph{Gap Sequence of Factors of Fibonacci Sequence},
+\href{https://arxiv.org/abs/1404.4269v1}{arXiv:1404.4269v1}, 2014.
+The numbered results cited here refer to this version.
+See also \emph{The sequence of return words of the Fibonacci sequence},
+Theoret. Comput. Sci. \textbf{593} (2015), 106--116,
+\href{https://doi.org/10.1016/j.tcs.2015.05.048}{doi:10.1016/j.tcs.2015.05.048}.
+
+\bibitem{MP}
+A. Maity and S. Puzynina,
+\emph{Bounds on the closed-rich constant of infinite words},
+\href{https://arxiv.org/abs/2605.19535v1}{arXiv:2605.19535v1}, 2026.
+\end{thebibliography}
+\end{document}
