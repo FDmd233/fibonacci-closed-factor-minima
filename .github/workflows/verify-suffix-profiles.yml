@@ -1,0 +1,29 @@
+name: Verify Fibonacci suffix profiles
+
+on:
+  push:
+    paths:
+      - 'paper/paper_en.tex'
+      - 'audit/**'
+      - '.github/workflows/verify-suffix-profiles.yml'
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  finite-independent-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile independent C++17 check
+        shell: bash
+        run: |
+          g++ -std=c++17 -O2 -Wall -Wextra -pedantic \
+            audit/verify_suffix_profiles.cpp -o /tmp/verify_suffix_profiles
+      - name: Check all 1,275,912 finite instances
+        shell: bash
+        run: |
+          /tmp/verify_suffix_profiles | tee /tmp/fibonacci_profile_audit.log
+          grep -q 'ALL_PASS tested=1275912' /tmp/fibonacci_profile_audit.log
