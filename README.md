@@ -40,6 +40,12 @@ make
 
 This compiles `paper/paper_en.tex` twice and writes `paper/paper_en.pdf`. File hashes are recorded in `SHA256SUMS`.
 
+## Independent finite verification
+
+The [independent audit](audit/README.md) reconstructs all three singular-kernel factor families and calculates longest repeated suffixes with a Z-algorithm, rather than taking the manuscript's piecewise expressions as input. It has verified **1,275,912** individual suffix-profile cases over the full blocks \(k=5,\dots,14\) (lengths 13 through 1596), including the claimed factor-family disjointness. The [automated verification workflow](.github/workflows/verify-suffix-profiles.yml) reruns the exact C++17 check on relevant changes.
+
+These calculations provide a reproducible finite consistency check, not a proof of the arbitrary-length theorem.
+
 ## Status
 
 This manuscript is presented as a proposed solution for independent verification. It has not undergone journal peer review.
